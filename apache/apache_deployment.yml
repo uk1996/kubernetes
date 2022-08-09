@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-deployment # Deployment 이름
+spec:
+  selector: # Deployment가 특정한 레이블이 부여된 파드를 관리할 수 있도록 함
+    matchLabels:
+      app: apache
+  replicas: 5 # 파드의 수를 3개로 유지
+  template:
+    metadata:
+      labels: # 파드의 레이블
+        app: apache
+    spec:
+      containers:
+        - name: apache
+          image: httpd
+#         volumeMounts:
+#           - mountPath: /test-volume
+#             name: hostpath-vol
+          ports:
+            - containerPort: 80
+#     volumes:
+#       - name: hostpath-vol
+#         hostPath:
+#           path: /tmp
+#           type: Directory

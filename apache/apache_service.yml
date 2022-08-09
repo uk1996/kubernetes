@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache-service
+spec:
+  type: NodePort # 워커 노드의 IP를 통해 서비스에 접근하도록함(실무에서는 LoadBalancer 설정하는 경우가 대부분) (ClusterIP, NodePort, LoadBalancer, ExternalName)
+  ports:
+    - port: 8099 # 서비스 포트
+      targetPort: 80 # 컨테이너 포트
+      protocol: TCP # 통신 프로토콜
+      nodePort: 30080 # 워커노드 포트
+  selector:
+    app: apache
